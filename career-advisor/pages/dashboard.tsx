@@ -5,7 +5,8 @@ import HiringProbability from '@/components/HiringProbability';
 import ATSOptimization from '@/components/ATSOptimization';
 import InterviewPrep from '@/components/InterviewPrep';
 import MarketTrends from '@/components/MarketTrends';
-import { RoleRecommendation, HiringProbability as HPType, ATSScore, InterviewPrepPlan } from '@/lib/types';
+import LearningPlanComponent from '@/components/LearningPlan';
+import { RoleRecommendation, HiringProbability as HPType, ATSScore, InterviewPrepPlan, LearningPlan } from '@/lib/types';
 import styles from '@/styles/dashboard.module.css';
 
 export default function Dashboard() {
@@ -14,6 +15,7 @@ export default function Dashboard() {
   const [hiringProb, setHiringProb] = useState<HPType | null>(null);
   const [atsScore, setAtsScore] = useState<{ atsScore: ATSScore; salaryBenchmark: any } | null>(null);
   const [prepPlan, setPrepPlan] = useState<InterviewPrepPlan | null>(null);
+  const [learningPlan, setLearningPlan] = useState<LearningPlan | null>(null);
   const [trends, setTrends] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,10 +51,11 @@ export default function Dashboard() {
       if (!selectedJobId) return;
 
       try {
-        const [probRes, atsRes, prepRes] = await Promise.all([
+        const [probRes, atsRes, prepRes, learningRes] = await Promise.all([
           fetch(`/api/hiring-probability?jobId=${selectedJobId}`),
           fetch(`/api/ats-score?jobId=${selectedJobId}`),
           fetch(`/api/interview-prep?jobId=${selectedJobId}`),
+          fetch(`/api/learning-plan?jobId=${selectedJobId}`),
         ]);
 
         const probData = await probRes.json();
@@ -63,6 +66,9 @@ export default function Dashboard() {
 
         const prepData = await prepRes.json();
         setPrepPlan(prepData);
+
+        const learningData = await learningRes.json();
+        setLearningPlan(learningData);
       } catch (error) {
         console.error('Failed to fetch job data:', error);
       }
@@ -100,6 +106,7 @@ export default function Dashboard() {
           <a href="#recommendations">Recommendations</a>
           <a href="#market">Market Trends</a>
           <a href="#details">Job Details</a>
+          <a href="#learning">Learning Plan</a>
         </nav>
 
         <main className={styles.main}>
@@ -147,6 +154,12 @@ export default function Dashboard() {
 
               {prepPlan && (
                 <InterviewPrep prepPlan={prepPlan} />
+              )}
+
+              {learningPlan && (
+                <section id="learning" className={styles.section}>
+                  <LearningPlanComponent learningPlan={learningPlan} />
+                </section>
               )}
             </section>
           )}

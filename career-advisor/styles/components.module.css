@@ -402,3 +402,82 @@
   color: #6b7280;
   font-size: 12px;
 }
+
+.learningSummary {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: #374151;
+}
+
+.overallFocus {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+.lessonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.learningItem {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+}
+
+.learningHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.learningSkill {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.learningBadge {
+  background: #dbeafe;
+  color: #1e40af;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.learningDetail {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.courseList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.courseItem {
+  margin-bottom: 10px;
+}
+
+.courseItem a {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.courseItem a:hover {
+  text-decoration: underline;
+}
+
+.courseProvider {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}

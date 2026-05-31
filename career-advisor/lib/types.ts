@@ -89,3 +89,22 @@ export interface InterviewPrepPlan {
   mockInterviewScript: string;
   estimatedPrep: number; // hours
 }
+
+export interface LearningCourse {
+  title: string;
+  provider: string;
+  url: string;
+}
+
+export interface LearningPlan {
+  jobId: string;
+  overallFocus: string;
+  learningSummary: string;
+  actionItems: {
+    skill: string;
+    importance: 'critical' | 'high' | 'medium' | 'low';
+    gapPercent: number;
+    timelineWeeks: number;
+    suggestedCourses: LearningCourse[];
+  }[];
+}
